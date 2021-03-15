@@ -1,0 +1,21 @@
+{
+  "menu": [
+    {
+      "url": "user",
+      "name": "User",
+      "i18n": "User",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
+      "url": "permission",
+      "name": "Permission",
+      "i18n": "Permission",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    }
+
+  ]
+}
