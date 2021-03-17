@@ -218,4 +218,18 @@ class Helper
             }
         }
     }
+
+    public static function uploadDocument($file)
+    {
+
+
+        $dest = public_path('documentfiles/');
+
+
+        $name = time() . Str::random(4). '.' . $file->getClientOriginalExtension();
+        $destinationPath = $dest ;
+        $file->move($destinationPath, $name);
+
+        return $name;
+    }
 }

@@ -10,8 +10,24 @@
     },
     {
       "url": "roles",
-      "name": "roles",
-      "i18n": "roles",
+      "name": "Roles",
+      "i18n": "Roles",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
+      "url": "services",
+      "name": "Services",
+      "i18n": "Services",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
+      "url": "suppliers",
+      "name": "Suppliers",
+      "i18n": "Suppliers",
       "class": "waves-effect waves-cyan",
       "icon": "mail_outline",
       "slug": "app-email"

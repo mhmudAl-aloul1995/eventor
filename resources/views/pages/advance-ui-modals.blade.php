@@ -286,3 +286,6 @@ $('.modal').modal({
 @section('page-script')
 <script src="{{asset('js/scripts/advance-ui-modals.js')}}"></script>
 @endsection
+<script>
+
+</script>

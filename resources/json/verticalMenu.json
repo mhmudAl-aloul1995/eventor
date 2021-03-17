@@ -17,6 +17,22 @@
       "slug": "app-email"
     },
     {
+      "url": "services",
+      "name": "Services",
+      "i18n": "Services",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
+      "url": "suppliers",
+      "name": "Suppliers",
+      "i18n": "Suppliers",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
       "url": "modern",
       "name": "Modern",
       "icon": "dashboard",

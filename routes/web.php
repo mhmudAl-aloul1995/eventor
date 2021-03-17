@@ -168,6 +168,13 @@ Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 Route::group([ 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('suppliers', 'supplierController');
+    Route::post('updatesuppliers', 'supplierController@update');
+
+
+    Route::resource('services', 'serviceController');
+    Route::post('updateServices', 'serviceController@update');
+
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
@@ -185,4 +192,20 @@ Route::group([ 'middleware' => ['auth']], function () {
     // Categories
     Route::delete('categories/destroy', 'CategoriesController@massDestroy')->name('categories.massDestroy');
     Route::resource('categories', 'CategoriesController');
+});
+Route::get('/migrate', function () {
+    ini_set('max_execution_time', 300);
+    //Artisan::call('migrate:fresh --seed');
+
+    Artisan::call('krlove:generate:model Supplier --table-name=suppliers');
+    Artisan::call('krlove:generate:model Service --table-name=services');
+    Artisan::call('krlove:generate:model Service --table-name=services');
+    Artisan::call('krlove:generate:model Country --table-name=countries');
+    Artisan::call('krlove:generate:model City --table-name=cities');
+    Artisan::call('krlove:generate:model Language --table-name=languages');
+    Artisan::call('krlove:generate:model EventType --table-name=event_types');
+    Artisan::call('krlove:generate:model UserAddress --table-name=user_address');
+    Artisan::call('krlove:generate:model Coupon --table-name=coupons');
+
+    return redirect('/');
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
@@ -28,7 +30,9 @@ class userController extends Controller
 
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::get();
+        $roles = Role::all();
+        $country = Country::all();
+        $city = City::all();
 
         $breadcrumbs = [
             ['link' => "modern", 'name' => "Home"], ['name' => "User"],
@@ -36,7 +40,7 @@ class userController extends Controller
         //Pageheader set true for breadcrumbs
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => true];
 
-        return view('pages.users', compact('roles'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+        return view('pages.users', compact('roles','country','city'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
 
     }
 

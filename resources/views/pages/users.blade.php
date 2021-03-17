@@ -32,13 +32,123 @@
                     <input name="id" type="hidden" value="">
 
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input placeholder="Username" name="name" type="text" class="validate">
                             <label for="Username">Username</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input placeholder="email" name="email" type="email" class="validate">
                             <label for="email">Email</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input placeholder="Phone" name="phone" type="text" class="validate">
+                            <label for="phone">Phone</label>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="input-field col s4">
+                            <input placeholder="address" name="address" type="text" class="validate">
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input disabled placeholder="Lat" name="lat" type="text" class="validate">
+                            <label for="lat">Lat</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input disabled placeholder="Long" name="long" type="text" class="validate">
+                            <label for="Long">Long</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input disabled placeholder="Ip Number" name="ip_number" type="text" class="validate">
+                            <label for="ip_number">Ip Number</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <label for="city_id" class="active">City</label>
+
+                            <select placeholder="City" required name="city_id" class=" validate  ">
+                                <option  value="">City</option>
+
+                                @foreach($city as $value)
+                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                        <div class="input-field col s4">
+                            <label for="city_id" class="active">Country</label>
+
+                            <select placeholder="Country" required name="country_id" class=" validate  ">
+                                <option  value="">Country</option>
+
+                                @foreach($country as $value)
+                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <label for="status" class="active">Status</label>
+
+                            <select placeholder="Status" required name="status" class=" validate  ">
+                                <option  value="">Status</option>
+                                <option value="0">active</option>
+                                <option value="1">inactive</option>
+
+
+                            </select>
+
+                        </div>
+                        <div class="input-field col s4">
+                            <label for="status" class="active">Gender</label>
+
+                            <select placeholder="Status" required name="statusd" class=" validate  ">
+                                <option  value="">Gender</option>
+                                <option value="0">male</option>
+                                <option value="1">femail</option>
+
+
+                            </select>
+
+                        </div>
+                        <div class="input-field col s4">
+                            <label for="enable_notification" class="active">Enable Notification</label>
+
+                            <select placeholder="Enable Notification" required name="enable_notification"
+                                    class=" validate  ">
+                                <option  value="">Enable Notification</option>
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="input-field col s4">
+                            <input placeholder="Last login" name="last_login" type="text" class="validate">
+                            <label for="last_login">Last login</label>
+                        </div>
+                        <div class="file-field input-field col s6">
+                            <div class="btn-small">
+                                <span>Image</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input placeholder="Image" name="image" class="file-path validate" type="file">
+                            </div>
                         </div>
 
 
@@ -136,13 +246,13 @@
                     $(".roles").select2();
 
 
-                    $('.roles').on('change',function () {
+                    $('.roles').on('change', function () {
                         var ids = $(this).val();
                         var str = $(this).attr('id');
                         var user_id = str.split("_")[2];
                         $.ajax({
                             url: links + '/updateRoleUsers/',
-                            data: {_token: token, roles: ids, user_id:user_id},
+                            data: {_token: token, roles: ids, user_id: user_id},
                             type: "POST",
                             success: function (data, textStatus, jqXHR) {
 

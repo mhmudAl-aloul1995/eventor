@@ -131,3 +131,4 @@ $('.dropdown-trigger').dropdown({
         stopPropagation: false // Stops event propagation
     }
 );
+
