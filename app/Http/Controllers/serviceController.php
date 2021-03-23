@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyServiceRequest;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Language;
 use App\Permission;
 use App\Role;
 use App\Service;
@@ -30,7 +31,8 @@ class serviceController extends Controller
 
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $supplier = Supplier::get();
+        $supplier = Supplier::all();
+        $languages = Language::all();
 
         $breadcrumbs = [
             ['link' => "modern", 'name' => __('locale.Home')], ['name' => "Service"],
@@ -38,7 +40,7 @@ class serviceController extends Controller
         //Pageheader set true for breadcrumbs
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => true];
 
-        return view('pages.services', compact('supplier'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+        return view('pages.services', compact('supplier','languages'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
 
     }
 

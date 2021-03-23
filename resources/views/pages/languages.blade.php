@@ -66,7 +66,6 @@
                             </div>
                             <div class="file-path-wrapper">
                                 <input required placeholder="{{__('locale.Icon')}}" name="icon" class="file-path validate" type="file">
-                                <input required placeholder="{{__('locale.Icon')}}" name="icon" class="file-path validate" type="file">
                             </div>
                         </div>
 
