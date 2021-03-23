@@ -113,7 +113,7 @@ var browserStatsChartOptions = {
 };
 
 var doughnutSalesChartData = {
-   labels: ["Mobile", "Kitchen", "Home"],
+   labels: ["Mobile", "Kitchen", __('locale.Home')],
    datasets: [
       {
          label: "Sales",

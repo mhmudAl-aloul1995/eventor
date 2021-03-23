@@ -8,7 +8,7 @@ class CreateLanguageDescriptionTable extends Migration
 {
     public function up()
     {
-        Schema::create('language_description', function (Blueprint $table) {
+        Schema::create('language_descriptions', function (Blueprint $table) {
 
             $table->bigIncrements('id');
 

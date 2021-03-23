@@ -34,10 +34,8 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <input placeholder="Title" name="title" type="text" class="validate">
-                            <label for="Username">role</label>
+                            <label for="Username">{{__('locale.Role')}}</label>
                         </div>
-
-
 
                     </div>
                 </form>
@@ -45,13 +43,15 @@
 
         </div>
         <div class="modal-footer">
-            <a href="#!" onclick="submitForm('roles')" class="modal-action  waves-effect waves-green btn-flat">Agree</a>
+            <a href="#!" onclick="submitForm('roles')"
+               class="modal-action  waves-effect waves-green btn-flat">{{__('locale.Agree')}}</a>
         </div>
     </div>
     <div class="section section-data-tables">
         <div class="card">
             <div class="card-content">
-                <a onclick="showModal('roles',null)" class="waves-effect waves-light btn">Add New</a>
+                <a onclick="showModal('roles',null)" class="waves-effect waves-light btn">{{__('locale.Add New')}}</a>
+                <a onclick="reloadTable('roles',null)" class="waves-effect green waves-light btn">{{__('locale.Reload')}}</a>
 
 
             </div>
@@ -63,15 +63,15 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <h4 class="card-title">Roles</h4>
+                        <h4 class="card-title">{{__('locale.Roles')}}</h4>
                         <div class="row">
                             <div class="col s12">
                                 <table id="rolesTable" class="display">
                                     <thead>
                                     <tr>
-                                        <th>role</th>
-                                        <th>permission</th>
-                                        <th>Action</th>
+                                        <th>{{__('locale.Role')}}</th>
+                                        <th>{{__('locale.Permission')}}</th>
+                                        <th>{{__('locale.Action')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -117,8 +117,32 @@
 
 
     <script>
+        function changePermission(role_id) {
+
+            var ids = $("#role_id_" + role_id).val()
+            $.ajax({
+                url: links + '/updateRolePermissions',
+                data: {_token: token, permissions: ids, role_id: role_id},
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                    M.toast({html: data.message})
+
+                    $("#rolesTable").DataTable().ajax.reload()
+
+                },
+                error: function (data, textStatus, jqXHR) {
+                    console.log(data)
+
+                    M.toast({html: data.message})
+                    $("#rolesTable").DataTable().ajax.reload()
+
+                },
+            });
+
+        }
 
         $(document).ready(function () {
+
 
             var roles = $('#rolesTable').DataTable({
                 processing: true,
@@ -131,28 +155,6 @@
                 "drawCallback": function (oSettings, json) {
                     $(".permissions").select2();
 
-
-                    $('.permissions').on('change',function () {
-                        var ids = $(this).val();
-                        var str = $(this).attr('id');
-                        var role_id = str.split("_")[2];
-                        $.ajax({
-                            url: links + '/updateRolePermissions/',
-                            data: {_token: token, permissions: ids, role_id:role_id},
-                            type: "POST",
-                            success: function (data, textStatus, jqXHR) {
-
-
-                            },
-                            error: function (data, textStatus, jqXHR) {
-                                console.log(data)
-
-                                M.toast({html: data.message})
-
-                            },
-                        });
-
-                    });
 
                 },
                 ajax: {

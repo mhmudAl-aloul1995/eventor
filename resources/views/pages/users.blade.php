@@ -33,16 +33,16 @@
 
                     <div class="row">
                         <div class="input-field col s4">
-                            <input placeholder="Username" name="name" type="text" class="validate">
-                            <label for="Username">Username</label>
+                            <input placeholder="{{__('locale.Username')}}" name="name" type="text" class="validate">
+                            <label for="username">{{__('locale.Username')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input placeholder="email" name="email" type="email" class="validate">
-                            <label for="email">Email</label>
+                            <input placeholder="{{__('locale.Email')}}" name="email" type="email" class="validate">
+                            <label for="email">{{__('locale.Email')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input placeholder="Phone" name="phone" type="text" class="validate">
-                            <label for="phone">Phone</label>
+                            <input placeholder="{{__('locale.Phone')}}" name="phone" type="text" class="validate">
+                            <label for="phone">{{__('locale.Phone')}}</label>
                         </div>
 
 
@@ -50,28 +50,28 @@
                     <div class="row">
 
                         <div class="input-field col s4">
-                            <input placeholder="address" name="address" type="text" class="validate">
-                            <label for="address">Address</label>
+                            <input placeholder="{{__('locale.Address')}}" name="address" type="text" class="validate">
+                            <label for="address">{{__('locale.Address')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input disabled placeholder="Lat" name="lat" type="text" class="validate">
-                            <label for="lat">Lat</label>
+                            <input  placeholder="{{__('locale.Lat')}}" name="lat" type="text" class="validate">
+                            <label for="lat">{{__('locale.Lat')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input disabled placeholder="Long" name="long" type="text" class="validate">
-                            <label for="Long">Long</label>
+                            <input  placeholder="{{__('Locale.Long')}}" name="long" type="text" class="validate">
+                            <label for="long">{{__('Locale.Long')}}</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input disabled placeholder="Ip Number" name="ip_number" type="text" class="validate">
-                            <label for="ip_number">Ip Number</label>
+                            <input  placeholder="{{__('locale.Ip Number')}}" name="ip_number" type="text" class="validate">
+                            <label for="ip_number">{{__('locale.Ip Number')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <label for="city_id" class="active">City</label>
+                            <label for="city_id" class="active">{{__('locale.City')}}</label>
 
-                            <select placeholder="City" required name="city_id" class=" validate  ">
-                                <option  value="">City</option>
+                            <select placeholder="{{__('locale.City')}}" required name="city_id" class=" validate  ">
+                                 <option    value="">{{__('locale.City')}}</option>
 
                                 @foreach($city as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -81,10 +81,10 @@
 
                         </div>
                         <div class="input-field col s4">
-                            <label for="city_id" class="active">Country</label>
+                            <label for="country_id" class="active">{{__('locale.Country')}}</label>
 
-                            <select placeholder="Country" required name="country_id" class=" validate  ">
-                                <option  value="">Country</option>
+                            <select placeholder="{{__('locale.Country')}}" required name="country_id" class=" validate  ">
+                                 <option    value="">{{__('locale.Country')}}</option>
 
                                 @foreach($country as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -98,37 +98,37 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
-                            <label for="status" class="active">Status</label>
+                            <label for="status" class="active">{{__('locale.Status')}}</label>
 
-                            <select placeholder="Status" required name="status" class=" validate  ">
-                                <option  value="">Status</option>
-                                <option value="0">active</option>
-                                <option value="1">inactive</option>
-
-
-                            </select>
-
-                        </div>
-                        <div class="input-field col s4">
-                            <label for="status" class="active">Gender</label>
-
-                            <select placeholder="Status" required name="statusd" class=" validate  ">
-                                <option  value="">Gender</option>
-                                <option value="0">male</option>
-                                <option value="1">femail</option>
+                            <select placeholder="{{__('locale.Status')}}" required name="status" class=" validate  ">
+                                 <option    value="">{{__('locale.Status')}}</option>
+                                <option value="0">{{__('locale.Active')}}</option>
+                                <option value="1">{{__('locale.In Active')}}</option>
 
 
                             </select>
 
                         </div>
                         <div class="input-field col s4">
-                            <label for="enable_notification" class="active">Enable Notification</label>
+                            <label for="status" class="active">{{__('locale.Gender')}}</label>
 
-                            <select placeholder="Enable Notification" required name="enable_notification"
+                            <select placeholder="{{__('locale.Gender')}}" required name="gender" class=" validate  ">
+                                 <option    value="">{{__('locale.Gender')}}</option>
+                                <option value="0">{{__('locale.Male')}}</option>
+                                <option value="1">{{__('locale.Female')}}</option>
+
+
+                            </select>
+
+                        </div>
+                        <div class="input-field col s4">
+                            <label for="enable_notification" class="active">{{__('locale.Enable Notification')}}</label>
+
+                            <select placeholder="{{__('locale.Enable Notification')}}" required name="enable_notification"
                                     class=" validate  ">
-                                <option  value="">Enable Notification</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
+                                 <option    value="">{{__('locale.Enable Notification')}}</option>
+                                <option value="0">{{__('locale.Yes')}}</option>
+                                <option value="1">{{__('locale.No')}}</option>
                             </select>
 
                         </div>
@@ -136,18 +136,29 @@
 
                     </div>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <label for="enable_notification" class="active">{{__('locale.Roles')}}</label>
+
+                            <select placeholder="{{__('locale.Roles')}}" required name="role_id" class=" validate  ">
+                                <option     value="">{{__('locale.Roles')}}</option>
+                                @foreach($roles as $value)
+                                <option value="{{$value->id}}">{{$value->title}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
 
                         <div class="input-field col s4">
                             <input placeholder="Last login" name="last_login" type="text" class="validate">
-                            <label for="last_login">Last login</label>
+                            <label for="last_login">{{__('locale.Last login')}}</label>
                         </div>
                         <div class="file-field input-field col s6">
                             <div class="btn-small">
-                                <span>Image</span>
+                                <span>{{__('locale.Image')}}</span>
                                 <input type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input placeholder="Image" name="image" class="file-path validate" type="file">
+                                <input placeholder="{{__('locale.Image')}}" name="image" class="file-path validate" type="file">
                             </div>
                         </div>
 
@@ -159,13 +170,14 @@
 
         </div>
         <div class="modal-footer">
-            <a href="#!" onclick="submitForm('users')" class="modal-action  waves-effect waves-green btn-flat">Agree</a>
+            <a href="#!" onclick="submitForm('users')" class="modal-action  waves-effect waves-green btn-flat">{{__('locale.Agree')}}</a>
         </div>
     </div>
     <div class="section section-data-tables">
         <div class="card">
             <div class="card-content">
-                <a onclick="showModal('users',null)" class="waves-effect waves-light btn">Add New</a>
+                <a onclick="showModal('users',null)" class="waves-effect waves-light btn">{{__('locale.Add New')}}</a>
+                <a onclick="reloadTable('users',null)" class="waves-effect green waves-light btn">{{__('locale.Reload')}}</a>
 
 
             </div>
@@ -175,18 +187,19 @@
         <!-- Users -->
         <div class="row">
             <div class="col s12">
+
                 <div class="card">
                     <div class="card-content">
-                        <h4 class="card-title">Users</h4>
+                        <h4 class="card-title">{{__('locale.User')}}</h4>
                         <div class="row">
                             <div class="col s12">
                                 <table id="usersTable" class="display">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Roles</th>
-                                        <th>Action</th>
+                                        <th>{{__('locale.Name')}}</th>
+                                        <th>{{__('locale.Email')}}</th>
+                                        <th>{{__('locale.Address')}}</th>
+                                        <th>{{__('locale.Action')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -232,72 +245,46 @@
 
 
     <script>
+        function searchRoles() {
+
+
+        }
+
+        var users = $('#usersTable').DataTable({
+            processing: true,
+            serverSide: true,
+
+            ajax: {
+                url: "{{url('users/{user}')}}",
+                data: function (d) {
+                    // d.orph_mom_name = $('#orph_mom_name_search').val();
+                },
+                type: "GET"
+
+
+            },
+            dom: "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+            buttons: [
+                'copy', 'excel', 'pdf',
+
+                {
+                    text: 'reload',
+                    className: 'btn green reload usersTable',
+                    action: function (e, dt, node, config) {
+                        dt.ajax.reload();
+                    }
+                },
+            ],
+            columns: [
+                {className: 'text-center', data: 'name', name: 'name', searchable: true},
+                {className: 'text-center', data: 'email', name: 'email', searchable: true},
+                {className: 'text-center', data: 'address', name: 'address', searchable: true},
+                {className: 'text-center', data: 'action', name: 'action', searchable: false},
+
+            ],
+        });
 
         $(document).ready(function () {
-            var users = $('#usersTable').DataTable({
-                processing: true,
-                serverSide: true,
-                "initComplete": function (oSettings, json) {
-                    $(".roles").select2();
-
-
-                },
-                "drawCallback": function (oSettings, json) {
-                    $(".roles").select2();
-
-
-                    $('.roles').on('change', function () {
-                        var ids = $(this).val();
-                        var str = $(this).attr('id');
-                        var user_id = str.split("_")[2];
-                        $.ajax({
-                            url: links + '/updateRoleUsers/',
-                            data: {_token: token, roles: ids, user_id: user_id},
-                            type: "POST",
-                            success: function (data, textStatus, jqXHR) {
-
-
-                            },
-                            error: function (data, textStatus, jqXHR) {
-                                console.log(data)
-
-                                M.toast({html: data.message})
-
-                            },
-                        });
-
-                    });
-
-                },
-                ajax: {
-                    url: "{{url('users/{user}')}}",
-                    data: function (d) {
-                        // d.orph_mom_name = $('#orph_mom_name_search').val();
-                    },
-                    type: "GET"
-
-
-                },
-                dom: "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-                buttons: [
-                    'copy', 'excel', 'pdf',
-
-                    {
-                        text: 'reload',
-                        className: 'btn green reload usersTable',
-                        action: function (e, dt, node, config) {
-                            dt.ajax.reload();
-                        }
-                    },
-                ],
-                columns: [
-                    {className: 'text-center', data: 'name', name: 'name', searchable: true},
-                    {className: 'text-center', data: 'email', name: 'email', searchable: true},
-                    {className: 'text-center', data: 'role', name: 'role', searchable: true},
-                    {className: 'text-center', data: 'action', name: 'action', searchable: false},
-
-                ],
-            });
 
 
         })

@@ -60,4 +60,8 @@ class Supplier extends Model
     {
         return $this->hasMany('App\SupplierPayment');
     }
+    public function language()
+    {
+        return $this->morphMany(LanguageDescription::class, 'languagable');
+    }
 }

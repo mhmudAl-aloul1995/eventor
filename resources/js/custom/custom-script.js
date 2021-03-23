@@ -29,7 +29,10 @@ function submitForm(formName) {
         });
         var file = $('#' + formName + 'Form').find('[type="file"]');
         if (file.length > 0) {
+            alert(5)
             formData.append(file.attr('name'), file[0].files[0]);
+        }else {
+            alert(7)
         }
         var id = $('#' + formName + 'Form').find('[name="id"]').val();
         $.ajax({
@@ -90,7 +93,6 @@ function deleteThis(formName, id) {
 }
 
 function showModal(formName, id) {
-
     $('#' + formName + 'Form').find('select').val(null).trigger('change');
     if (id == null) {
         $('#' + formName + 'Modal').modal('show', {backdrop: 'static'});

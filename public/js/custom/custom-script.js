@@ -49,41 +49,39 @@ $(".select2").select2({
 
 function submitForm(formName) {
     var form = $('#' + formName + 'Form')
+    form.attr('action', links + formName + id);
     form.validate();
     if (form.valid() == false) {
         $('#' + formName + 'Modal').modal('open');
         return false;
     } else {
-        var $form = form,
-            formData = new FormData(),
-            params = $form.serializeArray();
-        formData.append('_token', token);
-        $.each(params, function (i, obj) {
+        var $form = form, formData = new FormData();
+        var id = form.find('[name="id"]').val();
+        var file = form.find('[type="file"]')
+
+        $.each($form.serializeArray(), function (i, obj) {
             formData.append(obj.name, obj.value);
         });
-        var file = form.find('[type="file"]')
+        formData.append("_token", token);
+
+        id ? formData.append('_method', "PUT") : formData.append('_method', "POST")
 
         if (file.length > 0) {
             $.each(file, function (i, obj) {
 
-                formData.append($(obj).attr('name'), obj.files[0])
-
+                if ($(obj).val()) {
+                    formData.append($(obj).attr('name'), obj.files[0])
+                }
             });
         }
-
-
-        var id = form.find('[name="id"]').val();
-
-        id ? formData.append('_method', "POST") : null
         $.ajax({
-            url: $form.attr('action'),
+            url: id ? links + '/' + formName + '/' + id : links + '/' + formName,
             data: formData,
             cache: false,
             contentType: false,
             processData: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-
-            type: id ? "POST" : "POST",
+            type: "POST",
 
             success: function (data) {
                 if (data.success) {
@@ -129,36 +127,63 @@ function reloadTable(table) {
 }
 
 function showModal(formName, id) {
+
     var form = $('#' + formName + 'Form')
 
     form.find('.error').removeClass('error');
     form.find("lable").click();
     form.find("input,textarea").css("border-bottom", "1px solid #9e9e9e").css("box-shadow", "none").val(null)
-    //form.find('option:eq(0)').prop('selected', true).trigger('change');
+
+    var selects = form.find('select').serializeArray();
+    $.each(selects, function (i, field) {
+        var fieldName = field.name
+        const selected = document.querySelector('[name="' + fieldName + '"]');
+        const materializeSelected = M.FormSelect.init(selected);
+
+        selected.value = "";
+        if (typeof (Event) === 'function') {
+            var event = new Event('change');
+        } else {
+            var event = document.createEvent('Event');
+            event.initEvent('change', true, true);
+        }
+        selected.dispatchEvent(event)
+
+
+    });
 
 
     if (id == null) {
         $('#' + formName + 'Modal').modal('open');
-        form.attr('action', links + "/" + formName);
-        form.attr('method', "POST");
-
         form.find('[name="id"]').val(null);
 
     } else {
 
         $.get(links + "/" + formName + '/' + id + "/edit", function (data) {
+            console.log(data)
             if (data) {
-                form.attr('method', "POST");
-                form.attr('action', links + "/update" + formName);
                 var selects = form.find('select').serializeArray();
                 var inputs = form.find('textarea,input').serializeArray();
+
                 $.each(selects, function (i, field) {
                     var fieldName = field.name
-                    var select = $('[name="' + fieldName + '"]');
-                    select.formSelect();
 
-                    select.find('option:eq(' + data[fieldName] + ')').prop('selected', true);
-                    select.formSelect();
+
+                    const selected = document.querySelector('[name="' + fieldName + '"]');
+                    const materializeSelected = M.FormSelect.init(selected);
+                    selected.value = data[fieldName];
+
+                    if (formName == 'users' && fieldName == 'role_id') {
+                        selected.value = data['roles'][0]['id'];
+
+                    }
+                    if (typeof (Event) === 'function') {
+                        var event = new Event('change');
+                    } else {
+                        var event = document.createEvent('Event');
+                        event.initEvent('change', true, true);
+                    }
+                    selected.dispatchEvent(event)
 
                 });
                 $.each(inputs, function (i, field) {
@@ -166,7 +191,6 @@ function showModal(formName, id) {
                     var fieldName = field.name
                     form.find('[name="' + fieldName + '"]').val(data[fieldName]);
                 });
-                form.find('[name="_method"]').val("POST")
                 $('#' + formName + 'Modal').modal('open');
             }
         }).fail(function (data) {

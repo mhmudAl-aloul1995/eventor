@@ -4,7 +4,7 @@
     <div class="nav-wrapper">
       <div class="header-search-wrapper hide-on-med-and-down">
         <i class="material-icons">search</i>
-        <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize"
+        <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="{{__('locale.Explore Materialize')}}"
           data-search="template-list">
         <ul class="search-list collection display-none"></ul>
       </div>
@@ -54,23 +54,12 @@
           </a>
         </li>
         <li class="dropdown-item">
-          <a class="grey-text text-darken-1" href="{{url('lang/fr')}}" data-language="fr">
-            <i class="flag-icon flag-icon-fr"></i>
-            French
+          <a class="grey-text text-darken-1" href="{{url('lang/ar')}}" data-language="ar">
+            <i class="flag-icon flag-icon-sa"></i>
+            Arabic
           </a>
         </li>
-        <li class="dropdown-item">
-          <a class="grey-text text-darken-1" href="{{url('lang/pt')}}" data-language="pt">
-            <i class="flag-icon flag-icon-pt"></i>
-            Portuguese
-          </a>
-        </li>
-        <li class="dropdown-item">
-          <a class="grey-text text-darken-1" href="{{url('lang/de')}}" data-language="de">
-            <i class="flag-icon flag-icon-de"></i>
-            German
-          </a>
-        </li>
+
       </ul>
       <!-- notifications-dropdown-->
       <ul class="dropdown-content" id="notifications-dropdown">
@@ -153,7 +142,7 @@
       <div class="nav-wrapper">
         <form id="navbarForm">
           <div class="input-field search-input-sm">
-            <input class="search-box-sm mb-0" type="search" required="" placeholder='Explore Materialize' id="search"
+            <input class="search-box-sm mb-0" type="search" required="" placeholder='{{__('locale.Explore Materialize')}}' id="search"
               data-search="template-list">
             <label class="label-icon" for="search">
               <i class="material-icons search-sm-icon">search</i>

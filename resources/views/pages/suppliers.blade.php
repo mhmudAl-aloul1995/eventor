@@ -25,7 +25,7 @@
     <div id="suppliersModal"  class="modal ">
 
         <div class="modal-content">
-            <h4>Service</h4>
+            <h4>Supplier</h4>
 
             <div class="row">
                 <form id="suppliersForm" action="" class="col s12">
@@ -33,50 +33,45 @@
 
                     <div class="row">
                         <div class="input-field col s4">
-                            <input required placeholder="Name" name="name" type="text" class="validate">
-                            <label for="name">Name</label>
+                            <input required placeholder="{{__('Name')}}" name="name" type="text" class="validate">
+                            <label for="name">{{__('Name')}}</label>
                         </div>
 
                         <div class="input-field col s4">
-                            <input required placeholder="Address" name="address" type="text" class="validate">
-                            <label for="address">Address</label>
+                            <input required placeholder="{{__('Address')}}" name="address" type="text" class="validate">
+                            <label for="address">{{__('Address')}}</label>
                         </div>
 
                         <div class="input-field col s4">
-                            <input required placeholder="Location" name="location" type="text" class="validate">
-                            <label for="location">Location</label>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
-                            <input required placeholder="Phone" name="phone" type="number" class="validate">
-                            <label for="phone">Phone</label>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <input required placeholder="Price" name="email" type="email" class="validate">
-                            <label for="price">Email</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <textarea required placeholder="Website" name="website" type="text" class="validate materialize-textarea "></textarea>
-                            <label for="website">Website</label>
+                            <input required placeholder="{{__('Location')}}" name="location" type="text" class="validate">
+                            <label for="location">{{__('Location')}}</label>
                         </div>
 
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
-                            <textarea required placeholder="Description" name="description" type="text" class="validate materialize-textarea"></textarea>
-                            <label for="description">Description</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input required placeholder="Balance" name="balance" type="text" class="validate ">
-                            <label for="balance">Balance</label>
-                        </div>
 
+
+                        <div class="input-field col s4">
+                            <input required placeholder="{{__('Email')}}" name="email" type="email" class="validate">
+                            <label for="price">{{__('Email')}}</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <textarea required placeholder="{{__('Website')}}" name="website" type="text" class="validate materialize-textarea "></textarea>
+                            <label for="website">{{__('Website')}}</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <textarea required placeholder="{{__('Description')}}" name="description" type="text" class="validate materialize-textarea"></textarea>
+                            <label for="description">{{__('Description')}}</label>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="file-field input-field col s6">
+
+                        <div class="input-field col s4">
+                            <input required placeholder="{{__('Balance')}}" name="balance" type="number" class="validate ">
+                            <label for="balance">{{__('Balance')}}</label>
+                        </div>
+
+                        <div class="file-field input-field col s4">
                             <div class="btn-small">
                                 <span>Logo</span>
                                 <input type="file">
@@ -85,7 +80,7 @@
                                 <input placeholder="Logo" name="logo" class="file-path  validate" type="file">
                             </div>
                         </div>
-                        <div class="file-field input-field col s6">
+                        <div class="file-field input-field col s4">
                             <div class="btn-small">
                                 <span>Favicon</span>
                                 <input type="file">
@@ -105,14 +100,14 @@
         <div class="modal-footer">
             <a href="#!" onclick="closeModal('#suppliersForm')" class="modal-action modal-close  waves-effect waves-red btn-flat ">Close</a>
             <a href="#!" onclick="submitForm('suppliers')"
-               class="modal-action ok  waves-effect waves-green btn-flat">Agree</a>
+               class="modal-action ok  waves-effect waves-green btn-flat">{{__('Agree')}}</a>
         </div>
     </div>
     <div class="section section-data-tables">
         <div class="card">
             <div class="card-content">
-                <a onclick="showModal('suppliers',null)" class="waves-effect waves-light btn">Add New</a>
-                <a onclick="reloadTable('suppliers',null)" class="waves-effect green waves-light btn">Reload</a>
+                <a onclick="showModal('suppliers',null)" class="waves-effect waves-light btn">{{__('locale.Add New')}}</a>
+                <a onclick="reloadTable('suppliers',null)" class="waves-effect green waves-light btn">{{__('Reload')}}</a>
 
 
             </div>
@@ -124,22 +119,22 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <h4 class="card-title">Supplier</h4>
+                        <h4 class="card-title">{{__('Supplier')}}</h4>
                         <div class="row">
                             <div class="col s12">
                                 <table id="suppliersTable" class="display">
                                     <thead>
                                     <tr>
 
-                                        <th>Name</th>
-                                        <th>Logo</th>
-                                        <th>Favicon</th>
-                                        <th>Address</th>
-                                        <th>Location</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Website</th>
-                                        <th>Description</th>
+                                        <th>{{__('Name')}}</th>
+                                        <th>{{__('Logo')}}</th>
+                                        <th>{{__('Favicon')}}</th>
+                                        <th>{{__('Address')}}</th>
+                                        <th>{{__('Location')}}</th>
+                                        <th>{{__('Phone')}}</th>
+                                        <th>{{__('Email')}}</th>
+                                        <th>{{__('Website')}}</th>
+                                        <th>{{__('Description')}}</th>
 
 
                                         <th>Action</th>

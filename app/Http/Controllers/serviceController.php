@@ -33,7 +33,7 @@ class serviceController extends Controller
         $supplier = Supplier::get();
 
         $breadcrumbs = [
-            ['link' => "modern", 'name' => "Home"], ['name' => "Service"],
+            ['link' => "modern", 'name' => __('locale.Home')], ['name' => "Service"],
         ];
         //Pageheader set true for breadcrumbs
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => true];
@@ -55,8 +55,8 @@ class serviceController extends Controller
             ->addColumn('action', function ($data) {
 
 
-                return '<a onclick="showModal(`services`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">edit' . '</a>  '
-                    . '<a onclick="deleteThis(`services`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">delete' . '</a>';
+                return '<a onclick="showModal(`services`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Edit')  . '</a>  '
+                    . '<a onclick="deleteThis(`services`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Delete')  . '</a>';
             })
             ->rawColumns(['action' => 'action', 'role' => 'role'])
             ->toJson();
@@ -102,13 +102,13 @@ class serviceController extends Controller
 
             return response()->json([
                 'success' => FALSE,
-                'message' => "An error occurred during insertion"
+                'message' => __('locale.An error occurred during insertion')
 
             ]);
         }
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
 
         ]);
     }
@@ -119,13 +119,12 @@ class serviceController extends Controller
 
         $data = $request->all();
 
-        $user = Service::find($data['user_id']);
+        $user = Service::find($data['id']);
         $user->update($request->all());
-        $user->roles()->sync($request->input('roles', []));
 
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
         ]);
     }
 
@@ -134,7 +133,7 @@ class serviceController extends Controller
 
         if (Service::find($id)->delete()) {
             return response()->json([
-                'message' => 'Done successfully',
+                'message' => __('locale.Done successfully'),
             ]);
         }
 

@@ -35,12 +35,12 @@ class userController extends Controller
         $city = City::all();
 
         $breadcrumbs = [
-            ['link' => "modern", 'name' => "Home"], ['name' => "User"],
+            ['link' => "modern", 'name' => __('locale.Home')], ['name' => __('locale.User')],
         ];
         //Pageheader set true for breadcrumbs
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => true];
 
-        return view('pages.users', compact('roles','country','city'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+        return view('pages.users', compact('roles', 'country', 'city'), ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
 
     }
 
@@ -48,15 +48,14 @@ class userController extends Controller
     public function show(Request $request)
     {
         $data = $request->all();
-        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
 
-        $users = User::query()->with('roles')->orderBy('id', 'asc');
+        $users = User::query()->with('roles')->where('id', '!=', Auth::id())->orderBy('id', 'asc');
 
         return Datatables::of($users)
             ->addColumn('role', function ($data) {
                 $roles = Role::select('id', 'title')->get();
-                $role = '<select id="user_id_'.$data->id.'" multiple class="select2 roles validate browser-default ">';
+                $role = '<select id="user_id_' . $data->id . '" multiple class="select2 roles validate browser-default ">';
                 foreach ($roles as $value) {
                     $role .= "<option ";
 
@@ -74,15 +73,13 @@ class userController extends Controller
                 $role .= "</select>";
                 return $role;
             })
-
             ->addColumn('action', function ($data) {
 
 
-                return '<a onclick="showModal(`users`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">edit' . '</a>  '
-                    . '<a onclick="deleteThis(`users`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">delete' . '</a>';
+                return '<a onclick="showModal(`users`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Edit') . '</a>  '
+                    . '<a onclick="deleteThis(`users`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Delete') . '</a>';
             })
-             ->rawColumns(['action' => 'action', 'role' => 'role'])
-
+            ->rawColumns(['action' => 'action', 'role' => 'role'])
             ->toJson();
     }
 
@@ -90,23 +87,32 @@ class userController extends Controller
     public function edit(Request $request, $id)
     {
 
-        $data = User::find($id);
+        $data = User::find($id)->load('roles');
 
         if ($data) {
             return response()->json($data);
         }
-        return response(['message' => 'The operation failed'], 500);
+        return response(['message' => __('locale.The operation failed')], 500);
 
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-
         $validator = Validator::make($data, [
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')],
-            'name' => ['required']
+            'name' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+
         ]);
+
+        if (count($validator->errors()) > 0) {
+            return response()->json([
+                'success' => FALSE,
+                'message' => $validator->errors()->all()[0],
+
+            ]);
+        }
+
         if ($validator->failed()) {
 
             return response()->json([
@@ -118,19 +124,19 @@ class userController extends Controller
         $data['password'] = Hash::make($data['name']);
 
         $user = User::create($data);
-        $user->roles()->sync($request->input('roles', []));
+        $user->roles()->sync($data['role_id']);
 
         if (!$data) {
 
             return response()->json([
                 'success' => FALSE,
-                'message' => "An error occurred during insertion"
+                'message' => __('locale.An error occurred during insertion')
 
             ]);
         }
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
 
         ]);
     }
@@ -138,16 +144,37 @@ class userController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
+        $validator = Validator::make($data, [
+            'email' => 'required|email|unique:users,email,' . $data['id'],
+            'name' => 'required|unique:users,name,' . $data['id'],
 
-        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $user = User::find($data['user_id']);
-        $user->update($request->all());
-        $user->roles()->sync($request->input('roles', []));
-
-        return response()->json([
-            'success' => TRUE,
-            'message' => "Done successfully"
         ]);
+        if (count($validator->errors()) > 0) {
+            return response()->json([
+                'success' => FALSE,
+                'message' => $validator->errors()->all()[0],
+
+            ]);
+        }
+
+        if ($validator->failed()) {
+
+            return response()->json([
+                'success' => FALSE,
+                'message' => $validator->errors(),
+
+            ]);
+        }
+
+        $user = User::find($data['id']);
+        $user->update($request->all());
+        if (isset($data['role_id'])) {
+
+            return response()->json(['success' => TRUE, 'message' => __('locale.Done successfully')]);
+        }
+        $user->roles()->sync($data['role_id']);
+
+        return response()->json(['success' => TRUE, 'message' => __('locale.Done successfully')]);
     }
 
     public function destroy(Request $request, $id)
@@ -155,11 +182,11 @@ class userController extends Controller
 
         if (User::find($id)->delete()) {
             return response()->json([
-                'message' => 'Done successfully',
+                'message' => __('locale.Done successfully'),
             ]);
         }
 
-        return response(['message' => 'The operation failed'], 500);
+        return response(['message' => __('locale.The operation failed')], 500);
     }
 
 

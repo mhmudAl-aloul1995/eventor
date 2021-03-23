@@ -20,7 +20,7 @@ class roleController extends Controller
     {
         abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $permission = Permission::get();
+        $permission = Permission::all();
 
         return view('pages.roles', compact('permission'));
     }
@@ -33,7 +33,7 @@ class roleController extends Controller
 
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
 
         ]);
     }
@@ -58,11 +58,19 @@ class roleController extends Controller
         $data = $request->all();
         $role = Role::find($data['role_id']);
         $role->update($request->all());
+
+        if (isset($data['permissions']) < 1) {
+            return response()->json([
+                'success' => False,
+                'message' => __('locale.you must have at least one permission')
+
+            ]);
+        }
         $role->permissions()->sync($request->input('permissions', []));
 
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
 
         ]);
     }
@@ -73,12 +81,13 @@ class roleController extends Controller
 
         abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $query = Role::query()->with('permissions')->orderBy('roles.title','desc')->get();
+        $query = Role::query()->with('permissions')->orderBy('roles.title', 'desc')->get();
 
         return Datatables::of($query)
             ->addColumn('permission', function ($data) {
                 $permissions = Permission::select('id', 'title')->get();
-                $permission = '<select id="role_id_'.$data->id.'" multiple class="select2 permissions validate browser-default ">';
+
+                $permission = '<select  onChange="changePermission(' . $data->id . ')"  id="role_id_' . $data->id . '" multiple class="select2 permissions validate browser-default ">';
                 foreach ($permissions as $value) {
                     $permission .= "<option ";
 
@@ -91,7 +100,7 @@ class roleController extends Controller
                         }
                     }
 
-                $permission .= " value='{$value->id}'>{$value->title}</option>";
+                    $permission .= " value='{$value->id}'>{$value->title}</option>";
                 }
                 $permission .= "</select>";
                 return $permission;
@@ -116,7 +125,7 @@ class roleController extends Controller
 
         return response()->json([
             'success' => TRUE,
-            'message' => "Done successfully"
+            'message' => __('locale.Done successfully')
 
         ]);
     }

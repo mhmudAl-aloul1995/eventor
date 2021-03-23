@@ -163,41 +163,43 @@ Route::get('/charts-sparklines', 'ChartController@sparklines');
 
 
 // locale route
-Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 
 Route::group([ 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('suppliers', 'supplierController');
+    Route::resource('languages', 'LanguageController');
     Route::post('updatesuppliers', 'supplierController@update');
 
-
     Route::resource('services', 'serviceController');
-    Route::post('updateServices', 'serviceController@update');
+    Route::get('updateServices', 'serviceController@update');
 
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+
     Route::resource('permissions', 'PermissionsController');
 
     Route::post('updateRolePermissions','roleController@update');
-    Route::post('updateRoleUsers','userController@update');
-    // Roles
+
+    Route::post('updateRoleUsers','userController@updateRoleUsers');
+
     Route::delete('roles/destroy', 'roleController@massDestroy')->name('roles.massDestroy');
+
     Route::resource('roles', 'roleController');
 
     // Users
     Route::delete('users/destroy', 'userController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'userController');
 
-    // Categories
-    Route::delete('categories/destroy', 'CategoriesController@massDestroy')->name('categories.massDestroy');
-    Route::resource('categories', 'CategoriesController');
 });
 Route::get('/migrate', function () {
     ini_set('max_execution_time', 300);
     //Artisan::call('migrate:fresh --seed');
 
-    Artisan::call('krlove:generate:model Supplier --table-name=suppliers');
+    Artisan::call('krlove:generate:model Language --table-name=languages');
+    Artisan::call('krlove:generate:model LanguageDescription --table-name=language_description');
+    Artisan::call('krlove:generate:model LanguageTables --table-name=table_languages');
+/*    Artisan::call('krlove:generate:model Supplier --table-name=suppliers');
     Artisan::call('krlove:generate:model Service --table-name=services');
     Artisan::call('krlove:generate:model Service --table-name=services');
     Artisan::call('krlove:generate:model Country --table-name=countries');
@@ -205,7 +207,8 @@ Route::get('/migrate', function () {
     Artisan::call('krlove:generate:model Language --table-name=languages');
     Artisan::call('krlove:generate:model EventType --table-name=event_types');
     Artisan::call('krlove:generate:model UserAddress --table-name=user_address');
-    Artisan::call('krlove:generate:model Coupon --table-name=coupons');
+    Artisan::call('krlove:generate:model Coupon --table-name=coupons');*/
 
     return redirect('/');
 });
+Route::get('lang/{locale}', [LanguageController::class, 'swap']);

@@ -33,88 +33,83 @@
 
                     <div class="row">
                         <div class="input-field col s4">
-                            <input required placeholder="Name" name="name" type="text" class="validate">
-                            <label for="name">Name</label>
+                            <input required placeholder="{{__("Name")}}" name="name" type="text" class="validate">
+                            <label for="name">{{__("Name")}}</label>
                         </div>
 
                         <div class="input-field col s4">
-                            <select placeholder="Supplier Name" required name="supplier_id" class=" validate  ">
-                                <option  selected  value="">Supplier Name</option>
+                            <label for="supplier_id" class="active">{{__("Supplier Name")}}</label>
+
+                            <select placeholder="{{__("Supplier Name")}}" required name="supplier_id" class=" validate  ">
+                                <option  selected  value="">{{__("Supplier Name")}}</option>
 
                                 @foreach($supplier as $value)
                                     <option  value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
 
                             </select>
-                            <label for="supplier_id" class="active">Supplier Name</label>
 
                         </div>
                         <div class="input-field col s4">
-                            <textarea placeholder="Description" name="description" type="text" class="materialize-textarea validate"></textarea>
-                            <label for="description">Description</label>
+                            <textarea placeholder="{{__("Description")}}" name="description" type="text" class="materialize-textarea validate"></textarea>
+                            <label for="description">{{__("Description")}}</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input required placeholder="Priority" name="priority" type="text" class="validate">
-                            <label for="priority">Priority</label>
+                            <input required placeholder="{{__("Priority")}}" name="priority" type="text" class="validate">
+                            <label for="priority">{{__("Priority")}}</label>
                         </div>
 
                         <div class="input-field col s4">
-                            <input required placeholder="Price" name="price" type="number" class="validate">
-                            <label for="price">Price</label>
+                            <input required placeholder="{{__("Price")}}" name="price" type="number" class="validate">
+                            <label for="price">{{__("Price")}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <label class="active" for="is_vat">Is Vat</label>
+                            <label class="active" for="is_vat">{{__("Is Vat")}}</label>
 
                             <select placeholder="Is Vat" required name="is_vat" class=" validate ">
-                                <option   selected value="">Is Vat</option>
-                                <option   value="1">Yes</option>
-                                <option   value="2">No</option>
-
-
+                                <option   selected value="">{{__("Is Vat")}}</option>
+                                <option   value="1">{{__("Yes")}}</option>
+                                <option   value="2">{{__("No")}}</option>
                             </select>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input required placeholder="Vat No" name="vat_no" type="number" class="validate">
-                            <label for="vat_no">Vat No</label>
+                            <input required placeholder="{{__('locale.Vat No')}}" name="vat_no" type="number" class="validate">
+                            <label for="vat_no">{{__('locale.Vat No')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input required placeholder="Infants From" name="Infants_from" type="text" class="datepicker validate">
-                            <label for="Infants_from">Infants From</label>
+                            <input required placeholder="{{__('locale.Infants From')}}" name="Infants_from" type="number" class=" validate">
+                            <label for="Infants_from">{{__('locale.Infants From')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input required placeholder="Infants To" name="Infants_to" type="text" class="datepicker validate">
-                            <label for="Infants_to">Infants From</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
-                            <input required placeholder="Children From" name="children_from" type="text" class="datepicker validate">
-                            <label for="Children From">Infants From</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input required placeholder="Children From" name="children_from" type="text" class="datepicker validate">
-                            <label for="children_from">Children From</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input required placeholder="Children To" name="children_to" type="text" class="datepicker validate">
-                            <label for="children_to">Children To</label>
+                            <input required placeholder="{{__('locale.Infants To')}}" name="Infants_to" type="number" class=" validate">
+                            <label for="Infants_to">{{__('locale.Infants To')}}</label>
                         </div>
 
                     </div>
                     <div class="row">
+
                         <div class="input-field col s4">
-                            <input required placeholder="Adults From" name="Adults_from" type="text" class="datepicker validate">
-                            <label for="Adults_from">Adults From</label>
+                            <input required placeholder="{{__('locale.Children From')}}" name="children_from" type="number" class=" validate">
+                            <label for="Children From">{{__('locale.Children From')}}</label>
                         </div>
                         <div class="input-field col s4">
-                            <input required placeholder="Adults To" name="Adults_to" type="text" class="datepicker validate">
-                            <label for="Adults_to">Adults To</label>
+                            <input required placeholder="{{__('locale.Children To')}}" name="children_to" type="number" class=" validate">
+                            <label for="children_to">{{__('locale.Children To')}}</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <input required placeholder="{{__('locale.Adults From')}}" name="Adults_from" type="number" class=" validate">
+                            <label for="Adults_from">{{__('locale.Adults From')}}</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input required placeholder="{{__('locale.Adults To')}}" name="Adults_to" type="number" class=" validate">
+                            <label for="Adults_to">{{__('locale.Adults To')}}</label>
                         </div>
 
 
@@ -127,14 +122,14 @@
         <div class="modal-footer">
             <a href="#!" onclick="closeModal('#servicesForm')" class="modal-action modal-close  waves-effect waves-red btn-flat ">Close</a>
             <a href="#!" onclick="submitForm('services')"
-               class="modal-action ok  waves-effect waves-green btn-flat">Agree</a>
+               class="modal-action ok  waves-effect waves-green btn-flat">{{__('locale.Agree')}}</a>
         </div>
     </div>
     <div class="section section-data-tables">
         <div class="card">
             <div class="card-content">
-                <a onclick="showModal('services',null)" class="waves-effect waves-light btn">Add New</a>
-                <a onclick="reloadTable('services',null)" class="waves-effect green waves-light btn">Reload</a>
+                <a onclick="showModal('services',null)" class="waves-effect waves-light btn">{{__('locale.Add New')}}</a>
+                <a onclick="reloadTable('services',null)" class="waves-effect green waves-light btn">{{__('locale.Reload')}}</a>
 
 
             </div>
@@ -153,20 +148,20 @@
                                     <thead>
                                     <tr>
 
-                                        <th>Name</th>
-                                        <th>Supplier</th>
-                                        <th>Description</th>
-                                        <th>Priority</th>
-                                        <th>Price</th>
-                                        <th>Is vat</th>
-                                        <th>Vat No</th>
-                                        <th>Infants From</th>
-                                        <th>Infants To</th>
-                                        <th>Children From</th>
-                                        <th>Children To</th>
-                                        <th>Adults From</th>
-                                        <th>Adults To</th>
-                                        <th>Action</th>
+                                        <th>{{__('locale.Name')}}</th>
+                                        <th>{{__('locale.Supplier')}}</th>
+                                        <th>{{__('locale.Description')}}</th>
+                                        <th>{{__('locale.Priority')}}</th>
+                                        <th>{{__('locale.Price')}}</th>
+                                        <th>{{__('locale.Is Vat')}}</th>
+                                        <th>{{__('locale.Vat No')}}</th>
+                                        <th>{{__('locale.Infants From')}}</th>
+                                        <th>{{__('locale.Infants To')}}</th>
+                                        <th>{{__('locale.Children From')}}</th>
+                                        <th>{{__('locale.Children To')}}</th>
+                                        <th>{{__('locale.Adults From')}}</th>
+                                        <th>{{__('locale.Adults To')}}</th>
+                                        <th>{{__('locale.Action')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -214,7 +209,6 @@
     <script>
 
         $(document).ready(function () {
-            $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
 
 
             var services = $('#servicesTable').DataTable({
