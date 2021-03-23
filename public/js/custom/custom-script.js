@@ -1,4 +1,5 @@
 var $loading = $('.ok');
+var fieldsName =[];
 
 
 $('select[required]').css({
@@ -47,8 +48,23 @@ $(".select2").select2({
     width: '100%'
 });
 
+
+var onModalHide = function () {
+    $('form').validate().resetForm()
+};
+$(".modal").modal({
+    onOpenEnd: onModalHide
+});
+
+function reloadTable(table) {
+    $('#' + table + "Table").DataTable().ajax.reload()
+
+
+}
 function submitForm(formName) {
+console.log(fieldsName)
     var form = $('#' + formName + 'Form')
+    var  filesNotRequ= form.find('[type="file"]:not(:required)')
     form.attr('action', links + formName + id);
     form.validate();
     if (form.valid() == false) {
@@ -113,23 +129,11 @@ function submitForm(formName) {
     }
 }
 
-var onModalHide = function () {
-    $('form').validate().resetForm()
-};
-$(".modal").modal({
-    onOpenEnd: onModalHide
-});
-
-function reloadTable(table) {
-    $('#' + table + "Table").DataTable().ajax.reload()
-
-
-}
-
 function showModal(formName, id) {
 
     var form = $('#' + formName + 'Form')
 
+    form.find('#file-error').remove()
     form.find('.error').removeClass('error');
     form.find("lable").click();
     form.find("input,textarea").css("border-bottom", "1px solid #9e9e9e").css("box-shadow", "none").val(null)
@@ -156,9 +160,21 @@ function showModal(formName, id) {
     if (id == null) {
         $('#' + formName + 'Modal').modal('open');
         form.find('[name="id"]').val(null);
+        $.each(fieldsName, function (i, field) {
+
+            form.find('[name="' + field + '"]').attr('required',true);
+        });
 
     } else {
 
+        var  filesRequ= form.find('[type="file"]:required')
+        $.each(filesRequ, function (i, field) {
+
+            var fieldName = field.name
+            fieldsName.push(field.name);
+
+            form.find('[name="' + fieldName + '"]').attr('required',false);
+        });
         $.get(links + "/" + formName + '/' + id + "/edit", function (data) {
             console.log(data)
             if (data) {

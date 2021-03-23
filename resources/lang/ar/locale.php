@@ -1,5 +1,6 @@
 <?php
 return [
+    "Languages"=>'اللغات',
     "Yes"=>'نعم',
     "No"=>'لا',
     "Username"=>'إسم المستخدم',

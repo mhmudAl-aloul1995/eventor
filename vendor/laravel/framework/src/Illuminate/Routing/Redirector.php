@@ -36,7 +36,7 @@ class Redirector
     }
 
     /**
-     * Create a new redirect response to the __('locale.Home') route.
+     * Create a new redirect response to the "home" route.
      *
      * @param  int  $status
      * @return \Illuminate\Http\RedirectResponse

@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Language extends Model
 {
-    protected $table = 'languages';
-
     /**
      * The "type" of the auto-incrementing ID.
      * 
@@ -34,7 +32,7 @@ class Language extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function languageDescription()
+    public function languageDescriptions()
     {
         return $this->hasMany('App\LanguageDescription');
     }

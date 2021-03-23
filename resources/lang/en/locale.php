@@ -1,7 +1,8 @@
 <?php
 return [
-    "Icon"=>'Icon',
+    "Languages"=>'Languages',
     "File"=>'File',
+    "Icon"=>"Icon",
     "Home"=>'Home',
     "Yes"=>'Yes',
     "No"=>'No',

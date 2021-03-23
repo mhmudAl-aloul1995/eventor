@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 use App;
+
 class LanguageController extends Controller
 {
 
@@ -48,15 +49,15 @@ class LanguageController extends Controller
 
         return Datatables::of($languages)
             ->editColumn('status', function ($data) {
-                $status = ($data->status == 1) ? __('locale.Active')  : __('locale.In Active');
+                $status = ($data->status == 1) ? __('locale.Active') : __('locale.In Active');
 
                 return $status;
 
-                   })
+            })
             ->addColumn('action', function ($data) {
 
 
-                return '<a onclick="showModal(`languages`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Edit') .  '</a>  '
+                return '<a onclick="showModal(`languages`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Edit') . '</a>  '
                     . '<a onclick="deleteThis(`languages`,' . $data->id . ')" href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">' . __('locale.Delete') . '</a>';
             })
             ->rawColumns(['action' => 'action', 'role' => 'role'])
@@ -99,7 +100,7 @@ class LanguageController extends Controller
 
             foreach ($request->files as $name => $file) {
 
-                $fileName = uploadDocument($file);
+                $fileName = App\Helpers\Helper::uploadDocument($file);
                 $data[$name] = $fileName;
 
             }
@@ -134,7 +135,7 @@ class LanguageController extends Controller
             foreach ($request->files as $name => $file) {
 
                 $fileName = uploadDocument($file);
-                removeFile('documentfiles/'.$Language[$name]);
+                removeFile('documentfiles/' . $Language[$name]);
                 $data[$name] = $fileName;
 
             }
@@ -150,7 +151,12 @@ class LanguageController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        if (Language::find($id)->delete()) {
+        $delete = Language::find($id);
+        if ($delete->languageDescription()->count()>0) {
+            return response(['message' => 'The operation failed']);
+
+        }
+        if ($delete->delete()) {
             return response()->json([
                 'message' => __('locale.Done successfully'),
             ]);
@@ -158,18 +164,20 @@ class LanguageController extends Controller
 
         return response(['message' => 'The operation failed'], 500);
     }
+
     // set locale in session
-    public function swap($locale){
+    public function swap($locale)
+    {
 
 
         $availLocale = [
-            'en'=>'en',
-            'ar'=>'ar',
+            'en' => 'en',
+            'ar' => 'ar',
 
         ];
         if (array_key_exists($locale, $availLocale)) {
 
-           dd(App::setLocale($locale));
+            dd(App::setLocale($locale));
 
         }
         return redirect()->back();

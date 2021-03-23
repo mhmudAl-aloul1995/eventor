@@ -56,7 +56,7 @@
                                 <input type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input placeholder="{{__('locale.File')}}" name="file" class="file-path  validate" type="file">
+                                <input required placeholder="{{__('locale.File')}}" name="file" class="file-path  validate" type="file">
                             </div>
                         </div>
                         <div class="file-field input-field col s6">
@@ -65,7 +65,8 @@
                                 <input type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input placeholder="{{__('locale.Icon')}}" name="icon" class="file-path validate" type="file">
+                                <input required placeholder="{{__('locale.Icon')}}" name="icon" class="file-path validate" type="file">
+                                <input required placeholder="{{__('locale.Icon')}}" name="icon" class="file-path validate" type="file">
                             </div>
                         </div>
 

@@ -32,6 +32,14 @@
       "class": "waves-effect waves-cyan",
       "icon": "mail_outline",
       "slug": "app-email"
+    },
+    {
+      "url": "languages",
+      "name": "Languages",
+      "i18n": "Languages",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
     }
   ]
 }

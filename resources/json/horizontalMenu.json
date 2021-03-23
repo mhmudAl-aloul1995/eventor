@@ -1,6 +1,14 @@
 {
   "menu": [
     {
+      "url": "home",
+      "name": "Home",
+      "i18n": "Home",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
       "url": "users",
       "name": "Users",
       "i18n": "Users",
@@ -28,6 +36,14 @@
       "url": "suppliers",
       "name": "Suppliers",
       "i18n": "Suppliers",
+      "class": "waves-effect waves-cyan",
+      "icon": "mail_outline",
+      "slug": "app-email"
+    },
+    {
+      "url": "languages",
+      "name": "Languages",
+      "i18n": "Languages",
       "class": "waves-effect waves-cyan",
       "icon": "mail_outline",
       "slug": "app-email"
